@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import BuildBoxCTA from "@/components/BuildBoxCTA";
+import BuildBoxCTA from "@/components/BuildYourBox";
 import ProductSection from "@/components/ProductSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
