@@ -7,6 +7,9 @@ import BuildBoxCTA from "@/components/BuildBoxCTA";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import WhyChoose from "@/components/WhyChoose";
+import WellnessSupport from "@/components/WellnessSupport";
+
 
 export default function Home() {
   return (
@@ -15,6 +18,8 @@ export default function Home() {
       <Hero />
       <CategoryGrid />
       <CareBoxes />
+      <WhyChoose />
+      <WellnessSupport />
       <ProductSection />
       <BuildBoxCTA />
       <Testimonials />

@@ -1,20 +1,79 @@
-import { careBoxes } from "@/data/products";
+const boxes = [
+  {
+    name: "Monthly Care Box",
+    image: "/careboxes/monthly-care-box.png",
+    price: "₹1,999",
+    description: "Groceries, nutrition, and daily essentials.",
+  },
+  {
+    name: "Diabetes Care Box",
+    image: "/careboxes/diabetes-care-box.png",
+    price: "₹2,499",
+    description: "Healthy foods and diabetes-friendly products.",
+  },
+  {
+    name: "Heart Wellness Box",
+    image: "/careboxes/heart-care-box.png",
+    price: "₹2,999",
+    description: "Heart-conscious essentials for everyday wellness.",
+  },
+  {
+    name: "Wellness Care Box",
+    image: "/careboxes/wellness-care-box.png",
+    price: "₹1,799",
+    description: "Comfort, personal care, and wellness products.",
+  },
+];
 
 export default function CareBoxes() {
   return (
-    <section className="bg-green-50 py-16">
-      <h2 className="text-4xl font-bold text-center text-green-700">Our Most Loved Care Boxes</h2>
-      <p className="text-center text-gray-600 mt-3">Ready-made monthly care solutions for your loved ones.</p>
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-6 mt-10">
-        {careBoxes.map((box) => (
-          <div key={box.name} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
-            <div className="h-32 bg-gradient-to-br from-green-100 to-yellow-100 rounded-xl flex items-center justify-center font-bold text-green-700">SeniorKart Box</div>
-            <h3 className="text-xl font-bold mt-5">{box.name}</h3>
-            <p className="text-gray-600 mt-2">{box.description}</p>
-            <p className="font-bold text-xl mt-4">{box.price}</p>
-            <button className="mt-4 bg-green-700 text-white px-5 py-3 rounded-lg w-full hover:bg-green-800">Buy Now</button>
-          </div>
-        ))}
+    <section className="py-20 bg-gradient-to-r from-green-50 to-white">
+      <div className="max-w-7xl mx-auto px-6">
+
+        <h2 className="text-5xl font-extrabold text-center text-green-700">
+          SeniorKart Care Boxes
+        </h2>
+
+        <p className="text-center text-gray-600 mt-4 text-lg">
+          Thoughtfully curated boxes that bring comfort, care, and happiness to your loved ones.
+        </p>
+
+        <div className="grid md:grid-cols-4 gap-8 mt-12">
+
+          {boxes.map((box) => (
+            <div
+              key={box.name}
+              className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
+            >
+              <img
+                src={box.image}
+                alt={box.name}
+                className="w-full h-56 object-cover"
+              />
+
+              <div className="p-6">
+
+                <h3 className="text-2xl font-bold">
+                  {box.name}
+                </h3>
+
+                <p className="text-gray-600 mt-3">
+                  {box.description}
+                </p>
+
+                <p className="text-2xl text-green-700 font-bold mt-5">
+                  {box.price}
+                </p>
+
+                <button className="mt-6 w-full bg-green-700 text-white py-3 rounded-xl hover:bg-green-800">
+                  View Box
+                </button>
+
+              </div>
+            </div>
+          ))}
+
+        </div>
       </div>
     </section>
   );
