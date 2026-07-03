@@ -58,7 +58,7 @@ export default function CategoryGrid() {
         </p>
 
         <h2 className="text-4xl md:text-5xl font-extrabold text-center text-green-900 mt-3">
-          Everything for Senior Care, All in One Place
+            Seniors' Care, All in One Place
         </h2>
 
         <p className="text-center text-gray-600 mt-4 text-lg">
