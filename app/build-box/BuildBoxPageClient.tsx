@@ -7,115 +7,82 @@ const products = [
   { name: "Toor Dal 1kg", price: 180, category: "Groceries", icon: "🫘" },
   { name: "Cooking Oil 1L", price: 160, category: "Groceries", icon: "🛢️" },
   { name: "Tea Powder", price: 120, category: "Groceries", icon: "☕" },
-
   { name: "BP Monitor", price: 1499, category: "Health", icon: "🩺" },
   { name: "Thermometer", price: 299, category: "Health", icon: "🌡️" },
-  { name: "Glucometer", price: 999, category: "Health", icon: "💉" },
-
   { name: "Adult Diapers", price: 799, category: "Personal Care", icon: "🧴" },
   { name: "Moisturizer", price: 199, category: "Personal Care", icon: "🧼" },
-  { name: "Toothpaste", price: 99, category: "Personal Care", icon: "🪥" },
-
   { name: "Walking Stick", price: 699, category: "Mobility", icon: "🚶" },
-  { name: "Hot Water Bag", price: 249, category: "Comfort", icon: "♨️" },
-
   { name: "Greeting Card", price: 49, category: "Add-ons", icon: "💌" },
   { name: "Gift Packing", price: 99, category: "Add-ons", icon: "🎁" },
 ];
 
-export default function BuildYourBox() {
+export default function BuildBoxPageClient() {
   const [selected, setSelected] = useState<string[]>([]);
 
-  const addItem = (name: string) => {
-    if (!selected.includes(name)) {
-      setSelected([...selected, name]);
-    }
+  const selectedProducts = products.filter((p) => selected.includes(p.name));
+  const total = selectedProducts.reduce((sum, p) => sum + p.price, 0);
+
+  const toggle = (name: string) => {
+    setSelected((prev) =>
+      prev.includes(name) ? prev.filter((i) => i !== name) : [...prev, name]
+    );
   };
 
-  const removeItem = (name: string) => {
-    setSelected(selected.filter((item) => item !== name));
-  };
-
-  const selectedProducts = products.filter((product) =>
-    selected.includes(product.name)
-  );
-
-  const total = selectedProducts.reduce(
-    (sum, product) => sum + product.price,
-    0
-  );
-
-  const whatsappMessage = encodeURIComponent(
+  const message = encodeURIComponent(
     `Hello SeniorKart, I want to build my care box:\n\n${selectedProducts
       .map((item) => `${item.name} - ₹${item.price}`)
       .join("\n")}\n\nTotal: ₹${total}`
   );
 
   return (
-    <section className="py-20 bg-gradient-to-r from-yellow-50 to-green-50">
+    <section className="py-16">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-5xl font-extrabold text-center text-green-700">
+        <h1 className="text-5xl font-extrabold text-green-700 text-center">
           Build Your Own Care Box
-        </h2>
+        </h1>
 
         <p className="text-center text-gray-600 mt-4 text-lg">
-          Choose products for your loved one. We pack everything beautifully in a SeniorKart box.
+          Select products and send your custom box request on WhatsApp.
         </p>
 
         <div className="grid lg:grid-cols-3 gap-8 mt-12">
           <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
             {products.map((product) => (
-              <div
+              <button
                 key={product.name}
-                className="bg-white rounded-3xl shadow-lg p-6 hover:shadow-2xl transition"
+                onClick={() => toggle(product.name)}
+                className={`text-left rounded-3xl shadow p-6 border transition ${
+                  selected.includes(product.name)
+                    ? "bg-green-50 border-green-700"
+                    : "bg-white border-gray-100"
+                }`}
               >
                 <div className="text-5xl">{product.icon}</div>
-
                 <p className="text-sm text-green-700 font-bold mt-4">
                   {product.category}
                 </p>
-
                 <h3 className="text-2xl font-bold mt-2">{product.name}</h3>
-
                 <p className="text-2xl text-green-700 font-bold mt-3">
                   ₹{product.price}
                 </p>
-
-                {selected.includes(product.name) ? (
-                  <button
-                    onClick={() => removeItem(product.name)}
-                    className="mt-5 w-full bg-red-500 text-white py-3 rounded-xl font-bold"
-                  >
-                    Remove
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => addItem(product.name)}
-                    className="mt-5 w-full bg-green-700 text-white py-3 rounded-xl font-bold hover:bg-green-800"
-                  >
-                    + Add
-                  </button>
-                )}
-              </div>
+                <p className="mt-4 font-bold">
+                  {selected.includes(product.name) ? "✓ Added" : "+ Add"}
+                </p>
+              </button>
             ))}
           </div>
 
-          <div className="bg-white rounded-3xl shadow-2xl p-8 h-fit sticky top-28">
-            <h3 className="text-3xl font-bold text-green-700">
+          <div className="bg-white rounded-3xl shadow-xl p-8 h-fit sticky top-28">
+            <h2 className="text-3xl font-bold text-green-700">
               Your Care Box
-            </h3>
+            </h2>
 
             {selectedProducts.length === 0 ? (
-              <p className="text-gray-500 mt-6">
-                Add items to start building your box.
-              </p>
+              <p className="text-gray-500 mt-6">No items selected yet.</p>
             ) : (
               <div className="mt-6 space-y-4">
                 {selectedProducts.map((item) => (
-                  <div
-                    key={item.name}
-                    className="flex justify-between border-b pb-3"
-                  >
+                  <div key={item.name} className="flex justify-between border-b pb-3">
                     <span>{item.name}</span>
                     <span className="font-bold">₹{item.price}</span>
                   </div>
@@ -129,7 +96,7 @@ export default function BuildYourBox() {
             </div>
 
             <a
-              href={`https://wa.me/918904328298?text=${whatsappMessage}`}
+              href={`https://wa.me/918904328298?text=${message}`}
               className="block text-center mt-6 bg-green-700 text-white py-4 rounded-xl font-bold hover:bg-green-800"
             >
               Send Box Request

@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import CategoryGrid from "@/components/CategoryGrid";
 import CareBoxes from "@/components/CareBoxes";
 import ProductSection from "@/components/ProductSection";
-import BuildBoxCTA from "@/components/BuildYourBox";
+import HelpOrdering from "@/components/HelpOrdering";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -21,11 +21,12 @@ export default function Home() {
       <CareBoxes />
       <WhyChoose />
       <WellnessSupport />
-      <ProductSection />
       <BuildYourBox />
+       <ProductSection />
       <Testimonials />
-      <Footer />
-      <WhatsAppButton />
+<HelpOrdering />
+<Footer />
+<WhatsAppButton />
     </main>
   );
 }
